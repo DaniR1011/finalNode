@@ -1,10 +1,10 @@
 const config = require("config-yml");
 const mongoose = require('mongoose');
 const magic = require('../../utils/magic');
-const clase = require('../entities/entity-clase');
-const orden = require('../entities/entity-orden');
-const familia = require('../entities/entity-familia');
-const especie = require('../entities/entity-especie');
+const classes = require('../entities/entity-classes');
+const order = require('../entities/entity-order');
+const family = require('../entities/entity-family');
+const species = require('../entities/entity-species');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -19,13 +19,13 @@ if(config.db.mongodb && config.db.mongodb.length > 0){
         });
         db[c.nameconn] = {};
         db[c.nameconn].conn = mongoose;
-        db[c.nameconn].Clase = clase(mongoose);
-        db[c.nameconn].Orden = orden(mongoose);
-        db[c.nameconn].Familia = familia(mongoose);
-        db[c.nameconn].Especie = especie(mongoose);
+        db[c.nameconn].Classes = classes(mongoose);
+        db[c.nameconn].Order = order(mongoose);
+        db[c.nameconn].Family = family(mongoose);
+        db[c.nameconn].species = species(mongoose);
     });
     exports.db = db;
-    magic.LogInfo("Conectado con éxito a la base de datos")
+    magic.LogInfo("Connecting to the data base")
 } else {
-    magic.LogDanger('No existe la base de datos');
+    magic.LogDanger('Data base does not exists');
 }
